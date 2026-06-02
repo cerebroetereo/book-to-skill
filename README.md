@@ -1,4 +1,4 @@
-<h1 align="center">📚 book-to-skill</h1>
+<h1 align="center">📚 Creacion de skills basados en libros</h1>
 
 <p align="center">
   <strong>Turn any technical book or document into a Claude Code skill — ready to study, reference, and use while you work.</strong>
