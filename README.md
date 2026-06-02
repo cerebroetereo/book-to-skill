@@ -1,14 +1,14 @@
-<h1 align="center">📚 Creacion de skills basados en libros</h1>
+<h1 align="center">📚 Creación de skills basados en libros</h1>
 
 <p align="center">
-  <strong>Turn any technical book or document into a Claude Code skill — ready to study, reference, and use while you work.</strong>
+  <strong>Convierte cualquier libro o documento técnico en una skill de Claude Code — lista para estudiar, consultar y usar mientras trabajas.</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude_Code-Skill-blueviolet?style=for-the-badge" alt="Claude Code Skill">
-  <img src="https://img.shields.io/badge/PDF%20%E2%80%A2%20EPUB%20%E2%80%A2%20DOCX%20%E2%80%A2%20MD%20%E2%80%A2%20HTML%20%E2%80%A2%20RTF%20%E2%80%A2%20MOBI-supported-green?style=for-the-badge" alt="Formats supported">
-  <img src="https://img.shields.io/badge/effort-high-orange?style=for-the-badge" alt="Effort: high">
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License">
+  <img src="https://img.shields.io/badge/PDF%20%E2%80%A2%20EPUB%20%E2%80%A2%20DOCX%20%E2%80%A2%20MD%20%E2%80%A2%20HTML%20%E2%80%A2%20RTF%20%E2%80%A2%20MOBI-supported-green?style=for-the-badge" alt="Formatos soportados">
+  <img src="https://img.shields.io/badge/esfuerzo-alto-orange?style=for-the-badge" alt="Esfuerzo: alto">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="Licencia MIT">
 </p>
 
 > ## 🔱 Fork de [`virgiliojr94/book-to-skill`](https://github.com/virgiliojr94/book-to-skill)
@@ -17,225 +17,225 @@
 >
 > Este repositorio es una **copia del proyecto original** (con su historial completo). La **única modificación** es añadir **soporte de idioma de salida** en `SKILL.md`: ahora la skill generada puede escribirse en español (u otro idioma) aunque el libro esté en inglés. El resto de archivos (`scripts/extract.py`, etc.) son **idénticos al original**.
 >
-> 👉 Detalle de los cambios: [Cambios en este fork](#-cambios-en-este-fork-modifications) · *This is a fork — original work by [@virgiliojr94](https://github.com/virgiliojr94); the only change is added output-language support in `SKILL.md`.*
+> 👉 Detalle de los cambios: [Cambios en este fork](#-cambios-en-este-fork-modifications) · *Esto es un fork — trabajo original de [@virgiliojr94](https://github.com/virgiliojr94); el único cambio es el soporte de idioma de salida añadido en `SKILL.md`.*
 
 <p align="center">
-  <a href="#-why">Why</a> ·
-  <a href="#-what-it-generates">What it generates</a> ·
-  <a href="#-usage">Usage</a> ·
-  <a href="#-requirements">Requirements</a> ·
-  <a href="#-how-it-works">How it works</a> ·
+  <a href="#-por-qué">Por qué</a> ·
+  <a href="#-qué-genera">Qué genera</a> ·
+  <a href="#-uso">Uso</a> ·
+  <a href="#-requisitos">Requisitos</a> ·
+  <a href="#-cómo-funciona">Cómo funciona</a> ·
   <a href="#-cambios-en-este-fork-modifications">Modificaciones</a> ·
-  <a href="#-faq">FAQ</a> ·
-  <a href="#-install">Install</a>
+  <a href="#-preguntas-frecuentes">FAQ</a> ·
+  <a href="#-instalación">Instalación</a>
 </p>
 
 ---
 
-## 🤔 Why
+## 🤔 Por qué
 
-You buy a great technical book. You read it once. Three months later you can't remember chapter 7 existed.
+Compras un gran libro técnico. Lo lees una vez. Tres meses después ni recuerdas que existía el capítulo 7.
 
-The usual workarounds don't help:
-- 📄 "Let me just search the PDF" → you get a list of pages, not answers
-- 🧠 "I'll ask Claude about this book" → it either hallucinates or says it doesn't have the content
-- 📝 "I'll take notes as I read" → you end up with a 200-line doc you never open again
+Los apaños habituales no ayudan:
+- 📄 "Voy a buscar en el PDF" → obtienes una lista de páginas, no respuestas
+- 🧠 "Le pregunto a Claude sobre el libro" → o alucina o dice que no tiene el contenido
+- 📝 "Tomaré notas mientras leo" → acabas con un documento de 200 líneas que no vuelves a abrir
 
-**book-to-skill solves this by turning the book into a structured skill Claude loads on demand.**
+**book-to-skill resuelve esto convirtiendo el libro en una skill estructurada que Claude carga bajo demanda.**
 
-Once installed, you just type `/your-book-slug replication` and Claude reads the right chapter and answers from the actual content. No hallucination. No digging through PDFs. The book becomes part of your workflow.
-
----
-
-## 📦 What it generates
-
-Running `/book-to-skill your-book.pdf` (or `.epub`) creates a full skill at `~/.claude/skills/<slug>/`:
-
-| File | Purpose | Size |
-|------|---------|------|
-| `SKILL.md` | Core mental models + chapter index | ~4,000 tokens |
-| `chapters/ch01-*.md` … | One file per chapter, loaded on-demand | ~1,000 tokens each |
-| `glossary.md` | Every key term, alphabetically sorted with chapter refs | ~1,500 tokens |
-| `patterns.md` | All techniques, algorithms, and design patterns | ~2,000 tokens |
-| `cheatsheet.md` | Decision tables and quick-reference rules | ~1,000 tokens |
-
-**Chapter files are loaded on-demand** — they don't count against the skill budget until you ask about that topic.
+Una vez instalada, basta con escribir `/tu-libro-slug replication` y Claude lee el capítulo adecuado y responde con el contenido real. Sin alucinaciones. Sin rebuscar en PDFs. El libro pasa a formar parte de tu flujo de trabajo.
 
 ---
 
-## 🚀 Usage
+## 📦 Qué genera
+
+Ejecutar `/book-to-skill tu-libro.pdf` (o `.epub`) crea una skill completa en `~/.claude/skills/<slug>/`:
+
+| Archivo | Para qué sirve | Tamaño |
+|---------|----------------|--------|
+| `SKILL.md` | Modelos mentales clave + índice de capítulos | ~4.000 tokens |
+| `chapters/ch01-*.md` … | Un archivo por capítulo, cargado bajo demanda | ~1.000 tokens cada uno |
+| `glossary.md` | Todos los términos clave, ordenados alfabéticamente con referencias de capítulo | ~1.500 tokens |
+| `patterns.md` | Todas las técnicas, algoritmos y patrones de diseño | ~2.000 tokens |
+| `cheatsheet.md` | Tablas de decisión y reglas de referencia rápida | ~1.000 tokens |
+
+**Los archivos de capítulo se cargan bajo demanda** — no cuentan contra el presupuesto de la skill hasta que preguntas por ese tema.
+
+---
+
+## 🚀 Uso
 
 ```
-/book-to-skill <path-to-document> [skill-name-slug]
+/book-to-skill <ruta-al-documento> [slug-nombre-skill]
 ```
 
-Supported document formats: PDF, EPUB, DOCX, TXT, Markdown, reStructuredText, AsciiDoc, HTML, RTF, MOBI/AZW/AZW3.
+Formatos de documento soportados: PDF, EPUB, DOCX, TXT, Markdown, reStructuredText, AsciiDoc, HTML, RTF, MOBI/AZW/AZW3.
 
-**Examples:**
+**Ejemplos:**
 
 ```bash
-# PDF — derive skill name from filename
+# PDF — deriva el nombre de la skill del nombre del archivo
 /book-to-skill ~/Downloads/designing-data-intensive-applications.pdf
 
-# EPUB — specify a custom slug
+# EPUB — especifica un slug personalizado
 /book-to-skill ~/books/clean-code.epub clean-code
 
-# Full path with explicit name
+# Ruta completa con nombre explícito
 /book-to-skill /tmp/ddd-evans.pdf domain-driven-design
 ```
 
-After the skill is created, use it like any other Claude Code skill:
+Una vez creada la skill, úsala como cualquier otra skill de Claude Code:
 
 ```bash
-/designing-data-intensive-apps                  # load core mental models
-/designing-data-intensive-apps replication      # find and explain a topic
-/designing-data-intensive-apps ch05             # dive into chapter 5
-/designing-data-intensive-apps "what chapters do you have?"
+/designing-data-intensive-apps                  # carga los modelos mentales principales
+/designing-data-intensive-apps replication      # busca y explica un tema
+/designing-data-intensive-apps ch05             # entra en el capítulo 5
+/designing-data-intensive-apps "¿qué capítulos tienes?"
 ```
 
 ---
 
-## 🔧 Requirements
+## 🔧 Requisitos
 
-The extractor tries tools in order per format and uses the first available. If nothing is installed, it tells you which command to run. Plain text, Markdown, reStructuredText and AsciiDoc need no extra deps.
+El extractor prueba las herramientas en orden para cada formato y usa la primera disponible. Si no hay ninguna instalada, te dice qué comando ejecutar. El texto plano, Markdown, reStructuredText y AsciiDoc no necesitan dependencias adicionales.
 
-**PDF — choose by book type:**
+**PDF — elige según el tipo de libro:**
 
-| Book type | Tool | Install | Speed |
-|-----------|------|---------|-------|
-| Text-heavy (prose, few tables) | `pdftotext` (poppler) | `sudo apt install poppler-utils` | ⚡ instant |
-| Text-heavy fallback | `PyPDF2` | `pip3 install PyPDF2` | ⚡ instant |
-| Text-heavy fallback | `pdfminer.six` | `pip3 install pdfminer.six` | ⚡ instant |
-| **Technical (code, tables, formulas)** | **`docling`** | `pip3 install docling` | ~1.5s/page |
+| Tipo de libro | Herramienta | Instalación | Velocidad |
+|---------------|-------------|-------------|-----------|
+| Mucho texto (prosa, pocas tablas) | `pdftotext` (poppler) | `sudo apt install poppler-utils` | ⚡ instantáneo |
+| Reserva para texto | `PyPDF2` | `pip3 install PyPDF2` | ⚡ instantáneo |
+| Reserva para texto | `pdfminer.six` | `pip3 install pdfminer.six` | ⚡ instantáneo |
+| **Técnico (código, tablas, fórmulas)** | **`docling`** | `pip3 install docling` | ~1,5 s/página |
 
-> Before extraction begins, the skill asks you whether the book is **technical** or **text-heavy** and picks the right tool automatically. Docling preserves markdown tables and code blocks; pdftotext is faster for prose-only books.
+> Antes de empezar la extracción, la skill te pregunta si el libro es **técnico** o **de mucho texto** y elige la herramienta adecuada automáticamente. Docling conserva tablas y bloques de código en markdown; pdftotext es más rápido para libros solo de prosa.
 
 **EPUB:**
 
-| Tool | Install | Quality |
-|------|---------|---------|
-| `ebooklib` + `beautifulsoup4` | `pip3 install ebooklib beautifulsoup4` | ⭐⭐⭐ Best |
-| stdlib `zipfile` | built-in — no install needed | ⭐⭐ Always available |
+| Herramienta | Instalación | Calidad |
+|-------------|-------------|---------|
+| `ebooklib` + `beautifulsoup4` | `pip3 install ebooklib beautifulsoup4` | ⭐⭐⭐ La mejor |
+| `zipfile` (stdlib) | incluido — no requiere instalación | ⭐⭐ Siempre disponible |
 
-**Other formats:**
+**Otros formatos:**
 
-| Format | Tool | Install |
-|--------|------|---------|
-| DOCX | `python-docx` (fallback: stdlib ZIP/XML) | `pip3 install python-docx` |
-| HTML | `beautifulsoup4` (fallback: stdlib `html.parser`) | `pip3 install beautifulsoup4` |
-| RTF | `striprtf` (fallback: regex) | `pip3 install striprtf` |
-| MOBI / AZW / AZW3 | Calibre `ebook-convert` (external app, not pip) | https://calibre-ebook.com/download |
-| TXT / Markdown / reStructuredText / AsciiDoc | built-in | — |
+| Formato | Herramienta | Instalación |
+|---------|-------------|-------------|
+| DOCX | `python-docx` (reserva: ZIP/XML de stdlib) | `pip3 install python-docx` |
+| HTML | `beautifulsoup4` (reserva: `html.parser` de stdlib) | `pip3 install beautifulsoup4` |
+| RTF | `striprtf` (reserva: regex) | `pip3 install striprtf` |
+| MOBI / AZW / AZW3 | Calibre `ebook-convert` (app externa, no pip) | https://calibre-ebook.com/download |
+| TXT / Markdown / reStructuredText / AsciiDoc | incluido | — |
 
 ---
 
-## ⚙️ How it works
+## ⚙️ Cómo funciona
 
 ```
-PDF or EPUB
+PDF o EPUB
      │
      ▼
-Step 1.5 — "Technical or text-heavy book?"
+Step 1.5 — "¿Libro técnico o de mucho texto?"
      │
-     ├── technical → Docling  (tables + code blocks as markdown, ~1.5s/page)
-     └── text      → pdftotext → PyPDF2 → pdfminer  (instant)
+     ├── técnico → Docling  (tablas + bloques de código como markdown, ~1,5 s/página)
+     └── texto   → pdftotext → PyPDF2 → pdfminer  (instantáneo)
      │
      ▼
 scripts/extract.py --mode <technical|text>
-  EPUB → ebooklib → stdlib zipfile
+  EPUB → ebooklib → zipfile (stdlib)
      │
      ├── /tmp/book_skill_work/full_text.txt
      └── /tmp/book_skill_work/metadata.json
                │
                ▼
-          Claude analyzes structure
-          (title, author, chapters, ToC)
+          Claude analiza la estructura
+          (título, autor, capítulos, índice)
                │
                ▼
-          Generates per-chapter summaries  (800–1,200 tokens each)
-          technical → includes Code Examples + Reference Tables sections
-          Generates glossary, patterns, cheatsheet
-          Generates master SKILL.md with core mental models
+          Genera resúmenes por capítulo  (800–1.200 tokens cada uno)
+          técnico → incluye secciones de Ejemplos de código + Tablas de referencia
+          Genera glossary, patterns, cheatsheet
+          Genera el SKILL.md maestro con los modelos mentales clave
                │
                ▼
-          ~/.claude/skills/<slug>/  ✅ written
-          /tmp/book_skill_work/     🗑️  cleaned up
+          ~/.claude/skills/<slug>/  ✅ escrito
+          /tmp/book_skill_work/     🗑️  limpiado
 ```
 
-**Extraction benchmark** (103-page technical book, CPU only):
+**Benchmark de extracción** (libro técnico de 103 páginas, solo CPU):
 
-| Method | Time | Tokens | Tables | Code blocks |
-|--------|------|--------|--------|-------------|
-| pdftotext | 0.1s | 27K | 0 | 0 |
-| Docling | 164s | 27K (+1.2%) | 48 | 36 |
+| Método | Tiempo | Tokens | Tablas | Bloques de código |
+|--------|--------|--------|--------|-------------------|
+| pdftotext | 0,1 s | 27K | 0 | 0 |
+| Docling | 164 s | 27K (+1,2 %) | 48 | 36 |
 
 <details>
-<summary>Design principles (click to expand)</summary>
+<summary>Principios de diseño (clic para desplegar)</summary>
 
-1. **Density over completeness** — a 1,000-token summary beats a 10,000-token excerpt
-2. **Practitioner voice** — "Use X when Y", not "The book explains X"
-3. **Front-loaded SKILL.md** — compaction keeps the first ~5,000 tokens; the most important content comes first
-4. **On-demand chapters** — the topic index tells Claude which file to read; chapters load only when needed
-5. **Never raw text** — always synthesize, summarize, extract signal from the source
+1. **Densidad sobre exhaustividad** — un resumen de 1.000 tokens supera a un extracto de 10.000
+2. **Voz de practicante** — "Usa X cuando Y", no "El libro explica X"
+3. **SKILL.md con lo importante delante** — la compactación conserva los primeros ~5.000 tokens; lo más importante va primero
+4. **Capítulos bajo demanda** — el índice de temas le dice a Claude qué archivo leer; los capítulos se cargan solo cuando hacen falta
+5. **Nunca texto en bruto** — siempre sintetizar, resumir, extraer la señal de la fuente
 
 </details>
 
 ---
 
-## ❓ FAQ
+## ❓ Preguntas frecuentes
 
-**"Can't I just dump the PDF/EPUB into my Claude project context?"**
+**"¿No puedo simplemente meter el PDF/EPUB en el contexto de mi proyecto de Claude?"**
 
-You can — but every conversation will burn that token budget upfront. A 400-page book is ~200K tokens. With a skill, only the chapters relevant to your question load. The rest stays on disk until you need it.
+Puedes — pero cada conversación gastará ese presupuesto de tokens por adelantado. Un libro de 400 páginas son ~200K tokens. Con una skill, solo se cargan los capítulos relevantes para tu pregunta. El resto se queda en disco hasta que lo necesitas.
 
-More importantly: raw text injection is retrieval. A skill is reasoning. When you load a chapter file, Claude isn't searching for keyword matches — it's working with pre-extracted named frameworks, principles, and mental models structured for application, not for reading.
-
----
-
-**"Isn't this just RAG?"**
-
-RAG works at query time: chunk the book → embed everything → find similar vectors → inject into prompt. It's optimized for "find me the part that talks about X."
-
-book-to-skill works at compile time: one deep analysis run extracts the author's actual frameworks, names them, describes when to use each, captures the anti-patterns. The output is structure the author spent years building — not a similarity search over their sentences.
-
-RAG answers: *"here are chunks close to your query."*  
-A skill answers: *"here are the 12 frameworks this author built, ready to reason with."*
-
-For searching across 50+ books, RAG wins. For going deep on one book and using its frameworks while you work, a skill wins.
+Más importante aún: inyectar texto en bruto es *recuperación*. Una skill es *razonamiento*. Cuando cargas un archivo de capítulo, Claude no busca coincidencias de palabras clave — trabaja con marcos, principios y modelos mentales ya extraídos y nombrados, estructurados para aplicarlos, no para leerlos.
 
 ---
 
-**"Popular books are already in Claude's training data. Why bother?"**
+**"¿Esto no es simplemente RAG?"**
 
-For widely-known books (Clean Code, DDIA, Pragmatic Programmer), Claude has general knowledge — but it's compressed, averaged across the entire internet's discussion of the book, and may hallucinate specific quotes or chapter locations.
+RAG funciona en el momento de la consulta: trocea el libro → lo incrusta todo → busca vectores similares → lo inyecta en el prompt. Está optimizado para "encuéntrame la parte que habla de X".
 
-book-to-skill works from your actual copy. Every framework name, every anti-pattern list, every chapter number is grounded in the text you provided. No training data drift, no hallucinated chapter titles.
+book-to-skill funciona en el momento de la compilación: una única pasada de análisis profundo extrae los marcos reales del autor, los nombra, describe cuándo usar cada uno y captura los antipatrones. El resultado es la estructura que el autor tardó años en construir — no una búsqueda por similitud sobre sus frases.
 
-It also shines for books Claude doesn't know at all: niche technical references, internal company documentation, recent publications, translated works.
+RAG responde: *"aquí tienes fragmentos cercanos a tu consulta."*  
+Una skill responde: *"aquí tienes los 12 marcos que construyó este autor, listos para razonar con ellos."*
 
----
-
-**"NotebookLM handles multiple books better."**
-
-Absolutely true — if your workflow is "I have 80 books and I want to search across all of them," NotebookLM is the right tool.
-
-book-to-skill is built for a different job: you want to go deep on one book and have its frameworks embedded in your coding or writing workflow, not in a separate browser tab. It's less "library search" and more "the author is sitting next to you while you work."
+Para buscar entre más de 50 libros, gana RAG. Para profundizar en un libro y usar sus marcos mientras trabajas, gana una skill.
 
 ---
 
-## 📥 Install
+**"Los libros populares ya están en los datos de entrenamiento de Claude. ¿Para qué molestarse?"**
+
+Para libros muy conocidos (Clean Code, DDIA, Pragmatic Programmer), Claude tiene conocimiento general — pero está comprimido, promediado entre toda la discusión de internet sobre el libro, y puede alucinar citas concretas o ubicaciones de capítulos.
+
+book-to-skill funciona a partir de tu copia real. Cada nombre de marco, cada lista de antipatrones, cada número de capítulo está anclado en el texto que proporcionaste. Sin deriva de los datos de entrenamiento, sin títulos de capítulo alucinados.
+
+También brilla con libros que Claude no conoce en absoluto: referencias técnicas de nicho, documentación interna de empresa, publicaciones recientes, obras traducidas.
+
+---
+
+**"NotebookLM gestiona mejor varios libros."**
+
+Totalmente cierto — si tu flujo es "tengo 80 libros y quiero buscar en todos a la vez", NotebookLM es la herramienta adecuada.
+
+book-to-skill está hecho para otro trabajo: quieres profundizar en un libro y tener sus marcos integrados en tu flujo de programación o escritura, no en una pestaña aparte del navegador. Es menos "búsqueda en biblioteca" y más "el autor sentado a tu lado mientras trabajas".
+
+---
+
+## 📥 Instalación
 
 > 🇪🇸 **Guías en español:**
 > - [**Guía de instalación paso a paso (para principiantes)**](GUIA-INSTALACION.md) — instalar Claude Code, Python y las herramientas de extracción, un ejemplo de uso y dónde aparecen las skills generadas.
 > - [**Guía de prompts: cómo exprimir una skill-libro**](GUIA_PROMPTS_SKILL.md) — plantillas de preguntas para sacar el máximo a una skill ya generada.
 
-Copy this into your Claude Code session:
+Pega esto en tu sesión de Claude Code:
 
 ```
-Install book-to-skill (this fork): https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/SKILL.md
+Instala book-to-skill (este fork): https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/SKILL.md
 ```
 
-Or manually:
+O manualmente:
 
 ```bash
 mkdir -p ~/.claude/skills/book-to-skill/scripts
@@ -247,14 +247,14 @@ curl -o ~/.claude/skills/book-to-skill/scripts/extract.py \
   https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/scripts/extract.py
 ```
 
-> These commands install **this fork** — `SKILL.md` includes the output-language support; `extract.py` is identical to upstream. To install the **original** instead, replace `cerebroetereo/book-to-skill/main` with `virgiliojr94/book-to-skill/master`.
+> Estos comandos instalan **este fork** — `SKILL.md` incluye el soporte de idioma de salida; `extract.py` es idéntico al original. Para instalar el **original**, reemplaza `cerebroetereo/book-to-skill/main` por `virgiliojr94/book-to-skill/master`.
 
-Then in any Claude Code session:
+Después, en cualquier sesión de Claude Code:
 
 ```bash
-/book-to-skill ~/path/to/your-book.pdf
-# or
-/book-to-skill ~/path/to/your-book.epub
+/book-to-skill ~/ruta/a/tu-libro.pdf
+# o
+/book-to-skill ~/ruta/a/tu-libro.epub
 ```
 
 ---
@@ -277,14 +277,17 @@ Lo que **no** cambia: `scripts/extract.py`, el flujo de extracción, los formato
 
 ---
 
-## 📁 Repository structure
+## 📁 Estructura del repositorio
 
 ```
 book-to-skill/
-├── SKILL.md              # Skill definition + step-by-step instructions
+├── SKILL.md              # Definición de la skill + instrucciones paso a paso
 ├── scripts/
-│   └── extract.py        # PDF + EPUB extraction (pdftotext / PyPDF2 / pdfminer / ebooklib / zipfile)
-└── README.md             # This file
+│   └── extract.py        # Extracción (pdftotext / PyPDF2 / pdfminer / ebooklib / zipfile / Calibre)
+├── GUIA-INSTALACION.md   # Guía de instalación para principiantes (español)
+├── GUIA_PROMPTS_SKILL.md # Guía de prompts para exprimir las skills (español)
+├── LICENSE.md            # Licencia MIT
+└── README.md             # Este archivo
 ```
 
 ---
@@ -296,11 +299,11 @@ book-to-skill/
 
 El mérito del diseño original corresponde a su autor; este fork se limita a una mejora puntual sobre `SKILL.md`.
 
-## License
+## Licencia
 
-MIT — see [LICENSE.md](LICENSE.md). Original copyright belongs to the upstream author ([@virgiliojr94](https://github.com/virgiliojr94)); this fork keeps the same MIT license.
+MIT — ver [LICENSE.md](LICENSE.md). El copyright original pertenece al autor upstream ([@virgiliojr94](https://github.com/virgiliojr94)); este fork mantiene la misma licencia MIT.
 
-## Star History
+## Historial de estrellas
 
 <a href="https://www.star-history.com/?repos=virgiliojr94%2Fbook-to-skill&type=date&legend=top-left">
  <picture>
