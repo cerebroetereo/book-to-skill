@@ -11,12 +11,21 @@
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT License">
 </p>
 
+> ## 🔱 Fork de [`virgiliojr94/book-to-skill`](https://github.com/virgiliojr94/book-to-skill)
+>
+> **Autor original:** [@virgiliojr94](https://github.com/virgiliojr94) · **Este fork:** [@cerebroetereo](https://github.com/cerebroetereo)
+>
+> Este repositorio es una **copia del proyecto original** (con su historial completo). La **única modificación** es añadir **soporte de idioma de salida** en `SKILL.md`: ahora la skill generada puede escribirse en español (u otro idioma) aunque el libro esté en inglés. El resto de archivos (`scripts/extract.py`, etc.) son **idénticos al original**.
+>
+> 👉 Detalle de los cambios: [Cambios en este fork](#-cambios-en-este-fork-modifications) · *This is a fork — original work by [@virgiliojr94](https://github.com/virgiliojr94); the only change is added output-language support in `SKILL.md`.*
+
 <p align="center">
   <a href="#-why">Why</a> ·
   <a href="#-what-it-generates">What it generates</a> ·
   <a href="#-usage">Usage</a> ·
   <a href="#-requirements">Requirements</a> ·
   <a href="#-how-it-works">How it works</a> ·
+  <a href="#-cambios-en-este-fork-modifications">Modificaciones</a> ·
   <a href="#-faq">FAQ</a> ·
   <a href="#-install">Install</a>
 </p>
@@ -219,7 +228,7 @@ book-to-skill is built for a different job: you want to go deep on one book and 
 Copy this into your Claude Code session:
 
 ```
-Install book-to-skill: https://raw.githubusercontent.com/virgiliojr94/book-to-skill/master/SKILL.md
+Install book-to-skill (this fork): https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/SKILL.md
 ```
 
 Or manually:
@@ -228,11 +237,13 @@ Or manually:
 mkdir -p ~/.claude/skills/book-to-skill/scripts
 
 curl -o ~/.claude/skills/book-to-skill/SKILL.md \
-  https://raw.githubusercontent.com/virgiliojr94/book-to-skill/master/SKILL.md
+  https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/SKILL.md
 
 curl -o ~/.claude/skills/book-to-skill/scripts/extract.py \
-  https://raw.githubusercontent.com/virgiliojr94/book-to-skill/master/scripts/extract.py
+  https://raw.githubusercontent.com/cerebroetereo/book-to-skill/main/scripts/extract.py
 ```
+
+> These commands install **this fork** — `SKILL.md` includes the output-language support; `extract.py` is identical to upstream. To install the **original** instead, replace `cerebroetereo/book-to-skill/main` with `virgiliojr94/book-to-skill/master`.
 
 Then in any Claude Code session:
 
@@ -241,6 +252,24 @@ Then in any Claude Code session:
 # or
 /book-to-skill ~/path/to/your-book.epub
 ```
+
+---
+
+## 🔀 Cambios en este fork (modifications)
+
+Respecto al original de [@virgiliojr94](https://github.com/virgiliojr94), este fork añade **soporte de idioma de salida** en `SKILL.md`. Son **5 adiciones** (46 líneas, 0 borrados); ningún otro archivo cambia.
+
+| # | Dónde | Qué añade |
+|---|-------|-----------|
+| 1 | Nuevo **Step 4.5 — Ask output language** | Pregunta (vía `AskUserQuestion`) en qué idioma debe escribirse la skill resultante y fija ese **TARGET LANGUAGE** como instrucción permanente para toda la tarea. |
+| 2 | **Step 7** (capítulos) | Recordatorio de escribir cada capítulo en el idioma destino y **propagarlo a los subagentes** (no lo heredan). |
+| 3 | **Step 8** (glossary / patterns / cheatsheet) | Misma regla de idioma para los archivos de apoyo. |
+| 4 | **Step 9** (SKILL.md generado) | El cuerpo y el `description:` se escriben en el idioma destino; `name`, rutas y `allowed-tools` quedan en inglés/ASCII. |
+| 5 | **Quality Rules → regla 9** | *"Honor the target language"*: traduce la prosa y las cabeceras, pero preserva nombres de frameworks, código y rutas. |
+
+**Por qué:** el original generaba la skill en inglés (o en el idioma del libro). Con estos cambios puedes leer un libro en inglés y obtener una skill **íntegramente en español**, evitando que los subagentes reviertan en silencio al inglés — la causa más común de traducciones incompletas.
+
+Lo que **no** cambia: `scripts/extract.py`, el flujo de extracción, los formatos soportados y el resto del comportamiento del original.
 
 ---
 
@@ -256,9 +285,16 @@ book-to-skill/
 
 ---
 
+## 🙏 Créditos
+
+- **Proyecto y autor original:** [book-to-skill](https://github.com/virgiliojr94/book-to-skill) de [@virgiliojr94](https://github.com/virgiliojr94).
+- **Este fork:** [@cerebroetereo](https://github.com/cerebroetereo) — añade únicamente el soporte de idioma de salida descrito arriba.
+
+El mérito del diseño original corresponde a su autor; este fork se limita a una mejora puntual sobre `SKILL.md`.
+
 ## License
 
-MIT
+MIT — see [LICENSE.md](LICENSE.md). Original copyright belongs to the upstream author ([@virgiliojr94](https://github.com/virgiliojr94)); this fork keeps the same MIT license.
 
 ## Star History
 
