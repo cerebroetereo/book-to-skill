@@ -62,10 +62,76 @@ Arráncalo (la primera vez te pedirá iniciar sesión con tu cuenta de Anthropic
 claude
 ```
 
-> Existen también la app de escritorio (Mac/Windows), la web (<https://claude.ai/code>) y
-> extensiones para VS Code / JetBrains. Si prefieres una de esas, consulta la documentación
-> oficial: <https://docs.claude.com/en/docs/claude-code>. El resto de la guía asume la
-> terminal, pero los comandos `/...` funcionan igual en todas.
+> Existen también la app de escritorio (Mac/Windows), la web (<https://claude.ai/code>),
+> extensiones para **VS Code** y **JetBrains**, y editores tipo VS Code como **Antigravity**,
+> **Cursor** o **Windsurf**. El resto de la guía asume la terminal, pero los comandos `/...`
+> funcionan igual en todas — mira el **apartado 1.5** para instalar y usar la skill desde un
+> editor. Documentación oficial: <https://docs.claude.com/en/docs/claude-code>.
+
+---
+
+## 1.5 — Usarlo desde un editor de código (VS Code, Antigravity, Cursor…)
+
+**Idea clave (léela primero):** la skill se instala **una sola vez en tu equipo**
+(en `~/.claude/skills/`) y funciona en **cualquier sitio donde puedas ejecutar Claude Code**.
+El editor es solo "la ventana"; el motor que ejecuta la skill siempre es **Claude Code**. Por
+eso, instales como instales la skill (paso 4), estará disponible en todas las opciones de abajo.
+
+> ⚠️ Importante: `book-to-skill` es una skill **de Claude Code**. El asistente de IA *propio* de
+> algunos editores (por ejemplo, **Gemini** en Antigravity) **no** usa estas skills. Para
+> aprovecharla necesitas **Claude Code** dentro de ese editor — y siempre lo tienes a mano a
+> través de la **terminal integrada**.
+
+### Opciones disponibles
+
+| Dónde | Cómo se usa | Ideal para |
+|-------|-------------|------------|
+| **Terminal** | el comando `claude` (el del paso 1) | lo más simple; funciona siempre |
+| **VS Code** | extensión oficial "Claude Code" | si ya usas VS Code |
+| **JetBrains** (PyCharm, IntelliJ…) | plugin oficial "Claude Code" | usuarios de JetBrains |
+| **App de escritorio** (Mac/Windows) | descarga oficial | sin terminal, ventana propia |
+| **Web** | <https://claude.ai/code> | probar sin instalar nada |
+| **Antigravity / Cursor / Windsurf** | terminal integrada → `claude` | editores tipo VS Code con su propia IA |
+
+### A) VS Code (la integración más cómoda)
+
+1. Abre **VS Code**.
+2. Ve al icono de **Extensiones** (barra lateral izquierda, parece 4 cuadraditos) o pulsa
+   `Ctrl/⌘ + Mayús + X`.
+3. Busca **"Claude Code"** (de Anthropic) y pulsa **Install**.
+4. Inicia sesión cuando te lo pida (la misma cuenta de Claude del paso 1).
+5. Ábrelo desde el icono de Claude en la barra lateral (o con el atajo `Ctrl/⌘ + Esc`).
+6. Escribe `/book-to-skill ~/ruta/a/tu-libro.epub`, igual que en la terminal.
+
+> 💡 ¿No quieres instalar la extensión? En VS Code abre la **terminal integrada**
+> (menú *Terminal → New Terminal*, o el atajo `` Ctrl + ` ``) y escribe `claude`. Funciona idéntico.
+
+### B) Antigravity, Cursor, Windsurf (editores basados en VS Code)
+
+Son "primos" de VS Code, cada uno con **su propio asistente de IA** (en Antigravity es Gemini).
+Ese asistente propio **no** entiende las skills de Claude Code, pero puedes usar Claude Code
+dentro de ellos así:
+
+1. Ten Claude Code instalado (paso 1) y la skill instalada (paso 4).
+2. Abre el editor y su **terminal integrada**: menú **Terminal → New Terminal**
+   (o el atajo `` Ctrl + ` ``).
+3. En esa terminal escribe:
+   ```bash
+   claude
+   ```
+4. Ya dentro, usa los comandos de siempre: `/book-to-skill ...` para generar y `/tu-skill ...` para usar.
+
+> Algunos de estos editores también permiten instalar extensiones de VS Code. Si encuentras la
+> extensión **"Claude Code"** en su tienda, instálala como en el apartado A. Si no aparece, la
+> **terminal integrada** es el método que **siempre** funciona.
+
+### ¿Hace falta "configurar" algo?
+
+Muy poco:
+- **Iniciar sesión** en Claude la primera vez (te lo pide solo).
+- **Nada más para las skills**: se cargan automáticamente desde `~/.claude/skills/`. No hay que
+  "activarlas" en el editor. Si acabas de instalar una y no aparece, **cierra y vuelve a abrir**
+  el editor (o la terminal).
 
 ---
 
@@ -245,6 +311,12 @@ Para libros solo de prosa, elige *Texto*: es casi instantáneo.
 **La skill me salió en inglés y la quería en español.**
 Vuelve a generarla y, en la pregunta de idioma, elige **Español**. Esa pregunta es la
 función añadida en este fork.
+
+**Quiero usarlo en VS Code, Antigravity, Cursor…**
+Se puede: la skill funciona en cualquier editor donde ejecutes Claude Code. Mira el
+**apartado 1.5**. La vía que siempre funciona es abrir la **terminal integrada** del editor y
+escribir `claude`. Ojo: la IA *propia* de esos editores (Gemini en Antigravity) no usa skills de
+Claude Code.
 
 **¿Puedo borrar una skill generada?**
 Sí: borra su carpeta, p. ej. `rm -rf ~/.claude/skills/cialdini-influence`.
