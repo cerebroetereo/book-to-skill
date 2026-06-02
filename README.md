@@ -225,6 +225,10 @@ book-to-skill is built for a different job: you want to go deep on one book and 
 
 ## 📥 Install
 
+> 🇪🇸 **Guías en español:**
+> - [**Guía de instalación paso a paso (para principiantes)**](GUIA-INSTALACION.md) — instalar Claude Code, Python y las herramientas de extracción, un ejemplo de uso y dónde aparecen las skills generadas.
+> - [**Guía de prompts: cómo exprimir una skill-libro**](GUIA_PROMPTS_SKILL.md) — plantillas de preguntas para sacar el máximo a una skill ya generada.
+
 Copy this into your Claude Code session:
 
 ```
