@@ -280,6 +280,45 @@ Use the answer to weight what gets highlighted in the SKILL.md Core section.
 
 ---
 
+
+## Step 4.5 — Ask output language
+
+Before generating ANY files, ask the user which language the resulting skill must be
+written in. **Use the `AskUserQuestion` tool** (header: "Idioma") with these options — do
+NOT only ask in prose:
+
+> "¿En qué idioma quieres la skill resultante?
+>  1. Español
+>  2. English
+>  3. El mismo idioma que el libro original
+>  4. Otro (indícalo)"
+
+Store the answer as the **TARGET LANGUAGE**. For option 3, detect the book's language from
+the extracted text and use that. This is a **standing instruction for the rest of the
+task**, not a one-time step — re-apply it every time you write or delegate a file.
+
+ALL generated prose MUST be written in the TARGET LANGUAGE, regardless of the
+source book's language. This includes: every chapter summary, glossary.md,
+patterns.md, cheatsheet.md, the prose inside the generated SKILL.md, the `description:`
+value of the generated SKILL.md (keep it a valid one-line YAML string), AND the
+section headers shown in the templates of Steps 7 and 9 (translate "Core Idea",
+"Frameworks Introduced", etc. into the target language).
+
+**Propagation rule (critical).** If you delegate any generation (Steps 7–9) to subagents
+or parallel tasks, you MUST copy the TARGET LANGUAGE instruction verbatim into EVERY
+delegated prompt and tell each task to write all prose in TARGET LANGUAGE. A subagent does
+NOT inherit this context — if you omit it, that file silently reverts to English (or the
+book's language). This is the most common reason translated output fails.
+
+Do NOT translate (keep verbatim):
+- Proper names of frameworks/techniques/patterns (e.g. "The 5 Whys").
+  On first mention you may add a short translation in parentheses.
+- Code, commands, SQL, and technical identifiers (table/function names).
+- YAML frontmatter field NAMES and the functional values Claude Code needs: the skill
+  `name` slug, `allowed-tools`, `argument-hint` key, file paths, and the chapter file
+  slugs (`ch<NN>-<slug>.md`) — keep these ASCII/English for path safety.
+
+---
 ## Step 5 — Determine skill name
 
 If `SKILL_NAME` was provided, use it as the skill slug.
@@ -319,6 +358,8 @@ For EACH chapter/major section identified in Step 3:
 Read the corresponding section of the extracted `full_text.txt` (use character offsets or grep for chapter headings).
 
 Create `$SKILLS_HOME/<skill_name>/chapters/ch<NN>-<slug>.md` using the structure below.
+
+**Language (Step 4.5):** write every chapter file in the TARGET LANGUAGE, translating the section headers too. If you delegate chapters to subagents, pass the TARGET LANGUAGE explicitly in each prompt — they will not inherit it.
 
 **Adapt emphasis based on `BOOK_TYPE`:**
 - `technical` → prioritize "Code Examples", "Reference Tables", and "Commands & APIs" sections; preserve exact syntax
@@ -370,6 +411,8 @@ Create `$SKILLS_HOME/<skill_name>/chapters/ch<NN>-<slug>.md` using the structure
 
 ## Step 8 — Generate supporting files
 
+**Language (Step 4.5):** glossary.md, patterns.md and cheatsheet.md must be written in the TARGET LANGUAGE (term/framework names stay verbatim). If you delegate any of these, state the language in each prompt.
+
 ### glossary.md
 Create `$SKILLS_HOME/<skill_name>/glossary.md`:
 - Every significant term from the book, alphabetically sorted
@@ -394,6 +437,8 @@ Create `$SKILLS_HOME/<skill_name>/cheatsheet.md`:
 
 **CRITICAL TOKEN BUDGET: Keep SKILL.md body under 4,000 tokens.**
 Compaction truncates from the END — put the most important content FIRST.
+
+**Language (Step 4.5):** write the SKILL.md prose AND the `description:` value in the TARGET LANGUAGE. Keep `name`, `allowed-tools`, `argument-hint` and all file paths verbatim (English/ASCII).
 
 Create `$SKILLS_HOME/<skill_name>/SKILL.md`:
 
@@ -519,3 +564,4 @@ Usage:
 6. **Chapter files are on-demand** — they don't count against skill budget until loaded
 7. **Never copy raw book text** — always synthesize, summarize, extract signal
 8. **Topic index is critical** — it's how the agent navigates to the right chapter file
+9. **Honor the target language** — write all generated prose in the language chosen in Step 4.5, even when the book is in another language, and **propagate it into every delegated subagent prompt** (subagents don't inherit it). Translate meaning and section headers; preserve framework names, code, the skill `name` slug and file paths verbatim.
